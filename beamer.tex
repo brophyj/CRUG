@@ -1,0 +1,144 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=gray}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{color}
+
+\author{Joe Walsh}
+\title{Meet a New R Package: scrapeR}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+\begin{frame}{What scrapeR Does}
+  \textbf{Directly}
+
+  \begin{itemize}
+    \item downloads \& preprocesses webpages 
+    \item saves as a list 
+    \item one function: scrape() \pause 
+
+    \bigskip
+    \item Dependency package: XML \pause
+    \end{itemize}
+
+    \bigskip
+    \textbf{Indirectly}
+    \begin{itemize}
+    \item only requires three lines of code  
+    \item can be automated  
+    \item dynamic reports 
+    \item improved replicability 
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Why I Like It}
+  \begin{itemize}
+    \item huge amounts of data
+    \item new data being released
+    \item can stop static reports
+    \item eases replication
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Example: Cherry Hypothesis}
+  \begin{center}
+    \includegraphics[scale=.3]{"Don Cherry"}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}{Example: Cherry Hypothesis}
+  \begin{center}
+    \includegraphics[scale=.45]{"HockeyFights website"}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}{Example: Cherry Hypothesis}
+  \begin{center}
+    \includegraphics[scale=.45]{"NHL website"}
+  \end{center}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Example: Cherry Hypothesis}
+  \begin{verbatim}
+# install and load scrapeR package
+install.packages("scrapeR", dependencies=TRUE)
+library(scrapeR) 
+\end{verbatim} \pause 
+
+\begin{verbatim}
+# scrape data
+URLs <- c("http://www.nhl.com/ice/standings.htm?type=lea",
+          "http://www.hockeyfights.com/leaders/teams/")
+pageSource <- scrape(url=URLs, headers=FALSE, parse=TRUE)  
+\end{verbatim} \pause
+
+\begin{verbatim}
+# get two tables with info we need
+NHL.tables <- readHTMLTable(pageSource[[1]])
+  team.records <- NHL.tables[[3]]
+HockeyFights.tables <- readHTMLTable(pageSource[[2]])
+  team.fights <- HockeyFights.tables[[1]]
+  \end{verbatim}
+\end{frame}
+
+
+
+\begin{frame}{Example: Cherry Hypothesis}
+  \begin{center}
+    \includegraphics[scale=.45]{"cherry hypothesis"}
+  \end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Questions?}
+Email: j.thomas.walsh@gmail.com
+
+GitHub: jtwalsh0
+
+  \begin{center}
+    \includegraphics[scale=.20]{"DRW Logo"}
+  \end{center}
+\end{frame}
+
+
+\end{document}
+
+
+
+
+  \begin{center}
+    \begin{table}
+      \begin{tabular}{ll}
+      \textbf{Issue} & \textbf{scrapeR solution}  \\ \hline
+      want web data & downloads \& preprocesses pages \\
+      changing data & can be automated \\
+      static reports & dynamic reports \\
+      less reproducible reports & more reproducible reports \\
+      other languages more difficult & three lines of code \\
+      other languages take more time & three lines of code 
+      \end{tabular}
+    \end{table}
+  \end{center}
